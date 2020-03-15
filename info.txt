@@ -1,0 +1,13 @@
+https://www.worldometers.info/coronavirus/country/us/
+
+https://github.com/ExpDev07/coronavirus-tracker-api
+
+
+https://coronavirus-tracker-api.herokuapp.com/confirmed
+
+
+https://covid19.mathdro.id/api/daily
+
+https://covid19.mathdro.id/api/countries/usa
+
+https://covid19.mathdro.id/api/countries/usa/confirmed

@@ -60,7 +60,6 @@ var Chart = function Chart() {
   }, __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__["Line"], {
     data: chartData,
     options: chartOptions,
-    height: 130,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24
@@ -91,8 +90,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\components\\CountrySelector.js";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
@@ -107,17 +106,18 @@ var CountrySelector = function CountrySelector(_ref) {
   if (loading) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 9
     },
     __self: this
   }, "Countries Loading...");
   if (error) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 11
     },
     __self: this
-  }, "Error loading countries..");
+  }, "Error loading countries.."); // change value with countries.iso3[code] if iso3 code required to be passed to API
+
   var countryOptions = Object.entries(countries.countries).map(function (_ref2) {
     var _ref3 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, 2),
         name = _ref3[0],
@@ -125,7 +125,7 @@ var CountrySelector = function CountrySelector(_ref) {
 
     return {
       key: name,
-      value: countries.iso3[code],
+      value: code,
       text: name
     };
   });
@@ -142,11 +142,12 @@ var CountrySelector = function CountrySelector(_ref) {
     options: countryOptions,
     defaultValue: "world",
     onChange: function onChange(e, data) {
-      _onChange(data.value);
+      // console.log("countries=>", data.value, countries.iso3[data.value]);
+      _onChange(data.value, countries.iso3[data.value]);
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 34
     },
     __self: this
   }));
@@ -180,14 +181,15 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 var StateStats = function StateStats(_ref) {
   var country = _ref.country;
 
+  //console.log("state stats =>", country);
   if (country === "world") {
-    return __jsx("p", {
+    return __jsx("h3", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 8
+        lineNumber: 9
       },
       __self: this
-    }, "Select country to see state wise data");
+    }, "Select country above to see state wise data");
   }
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined),
@@ -206,25 +208,25 @@ var StateStats = function StateStats(_ref) {
   if (loading) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 22
     },
     __self: this
   }, "Loading States of selected country...");
   if (error) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 24
     },
     __self: this
   }, "Retrieving states API Error => ", error.toString());
   if (states.error) return __jsx("h3", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 28
     },
     __self: this
-  }, "No data found. Retrieving states API error => ", stats.error.message);
-  console.log("State wise info", states);
+  }, "No data found. Retrieving states API error => ", stats.error.message); //console.log("State wise info", states);
+
   var stateOptions = states.map(function (_ref2, index) {
     var provinceState = _ref2.provinceState,
         countryRegion = _ref2.countryRegion;
@@ -238,8 +240,7 @@ var StateStats = function StateStats(_ref) {
   var _onChange = function onChange(selectedValue) {
     var selected = states.find(function (state) {
       return state.provinceState === selectedValue;
-    });
-    console.log("Selected state info", selected);
+    }); // console.log("Selected state info", selected);
 
     if (!selected) {
       selected = states[0];
@@ -260,30 +261,31 @@ var StateStats = function StateStats(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 52
     },
     __self: this
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: this
   }), selectedState && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"].Group, {
+    stackable: true,
     itemsPerRow: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 65
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-    header: "Confirmed",
+    header: "Total",
     description: selectedState && Object(_utils_format__WEBPACK_IMPORTED_MODULE_3__["numberWithCommas"])(selectedState.confirmed),
     color: "grey",
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 66
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -293,7 +295,7 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -303,7 +305,7 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 82
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -313,7 +315,7 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 90
     },
     __self: this
   })));
@@ -374,27 +376,29 @@ var Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
     __self: this
   }, "No data found. API error => ", stats.error.message);
   var items = [{
-    header: "Coronavirus Cases",
+    header: "Total",
     description: "".concat(Object(_utils_format__WEBPACK_IMPORTED_MODULE_3__["numberWithCommas"])(stats.confirmed.value)),
     color: "grey",
+    meta: "",
+    width: "10"
+  }, {
+    header: "Recovered",
+    color: "green",
+    description: "".concat(Object(_utils_format__WEBPACK_IMPORTED_MODULE_3__["numberWithCommas"])(stats.recovered.value)),
     meta: ""
   }, {
     header: "Deaths",
     color: "red",
     description: "".concat(Object(_utils_format__WEBPACK_IMPORTED_MODULE_3__["numberWithCommas"])(stats.deaths.value)),
     meta: ""
-  }, {
-    header: "Recovered",
-    color: "green",
-    description: "".concat(Object(_utils_format__WEBPACK_IMPORTED_MODULE_3__["numberWithCommas"])(stats.recovered.value)),
-    meta: ""
   }];
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"].Group, {
+    stackable: true,
     itemsPerRow: 3,
     items: items,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 41
     },
     __self: this
   }));
@@ -86105,12 +86109,15 @@ var Index = function Index() {
     });
   }, [selectedCountry]);
 
-  var onChange = function onChange(country) {
-    setSelected(country);
+  var onChange = function onChange(country, iso3) {
+    //console.log("country=>", country, "iso3=>", iso3);
+    //this is to load state dropdown
+    setSelected(iso3);
 
     if (country === "world") {
       setUrl("https://covid19.mathdro.id/api");
     } else {
+      //this is to load statistics of selected country. country is iso2 code
       setUrl("https://covid19.mathdro.id/api/countries/".concat(country));
     }
   };
@@ -86118,89 +86125,91 @@ var Index = function Index() {
   return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 36
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 37
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 38
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 39
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 40
     },
     __self: this
   }, __jsx(_components_Chart__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 41
     },
     __self: this
   })))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 45
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 46
     },
     __self: this
-  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"], {
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
+    as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 47
     },
     __self: this
   }, __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: onChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 48
     },
     __self: this
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 49
     },
     __self: this
   }), memoStatsComponent))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 59
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 60
     },
     __self: this
-  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"], {
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
+    as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 61
     },
     __self: this
   }, memoStateStats)))));
@@ -86236,11 +86245,12 @@ var getChartDate = function getChartDate(chartType, apiData) {
     datasets: [(_ref = {
       label: "Total",
       fill: false,
-      lineTension: 0.1,
+      lineTension: 0,
+      borderWidth: 2,
       pointBackgroundColor: "red",
       pointBorderColor: "red",
       pointHoverRadius: 5,
-      pointRadius: 3,
+      pointRadius: 2,
       backgroundColor: "red",
       pointHoverBackgroundColor: "red",
       pointHoverBorderColor: "rgba(220,220,220,1)",
@@ -86250,7 +86260,8 @@ var getChartDate = function getChartDate(chartType, apiData) {
     })), _ref), {
       label: "China",
       fill: false,
-      lineTension: 0.1,
+      lineTension: 0,
+      borderWidth: 2,
       backgroundColor: "orange",
       borderColor: "orange",
       borderCapStyle: "butt",
@@ -86264,7 +86275,7 @@ var getChartDate = function getChartDate(chartType, apiData) {
       pointHoverBackgroundColor: "orange",
       pointHoverBorderColor: "rgba(220,220,220,1)",
       pointHoverBorderWidth: 2,
-      pointRadius: 3,
+      pointRadius: 2,
       pointHitRadius: 10,
       data: sliced.map(function (it) {
         return it.mainlandChina;
@@ -86272,7 +86283,8 @@ var getChartDate = function getChartDate(chartType, apiData) {
     }, {
       label: "Other Countries",
       fill: false,
-      lineTension: 0.1,
+      lineTension: 0,
+      borderWidth: 2,
       backgroundColor: "blue",
       borderColor: "blue",
       borderCapStyle: "butt",
@@ -86286,7 +86298,7 @@ var getChartDate = function getChartDate(chartType, apiData) {
       pointHoverBackgroundColor: "blue",
       pointHoverBorderColor: "rgba(220,220,220,1)",
       pointHoverBorderWidth: 2,
-      pointRadius: 3,
+      pointRadius: 2,
       pointHitRadius: 10,
       data: sliced.map(function (it) {
         return it.otherLocations;
@@ -86294,7 +86306,8 @@ var getChartDate = function getChartDate(chartType, apiData) {
     }, {
       label: "Recovered",
       fill: false,
-      lineTension: 0.1,
+      lineTension: 0,
+      borderWidth: 2,
       backgroundColor: "green",
       borderColor: "green",
       borderCapStyle: "butt",
@@ -86308,7 +86321,7 @@ var getChartDate = function getChartDate(chartType, apiData) {
       pointHoverBackgroundColor: "green",
       pointHoverBorderColor: "rgba(220,220,220,1)",
       pointHoverBorderWidth: 2,
-      pointRadius: 3,
+      pointRadius: 2,
       pointHitRadius: 10,
       data: sliced.map(function (it) {
         return it.totalRecovered;

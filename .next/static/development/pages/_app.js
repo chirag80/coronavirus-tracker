@@ -82,6 +82,20 @@ exports.push([module.i, " /*\n * # Semantic UI - 2.4.0\n * https://github.com/Se
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./style/App.css":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!./node_modules/postcss-loader/src??__nextjs_postcss!./style/App.css ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(true);
+// Module
+exports.push([module.i, "html,\r\nbody {\r\n  height: 100%;\r\n}\r\n\r\ncanvas {\r\n  height: 100%;\r\n}\r\n\r\n.large.text {\r\n  font-size: 2rem;\r\n}\r\n\r\n.ui.card > .content > .header:not(.ui),\r\n.ui.cards > .card > .content > .header:not(.ui) {\r\n  font-size: 1.25em;\r\n}\r\n\r\n.ui.card > .content > .header + .description,\r\n.ui.card > .content > .meta + .description,\r\n.ui.cards > .card > .content > .header + .description,\r\n.ui.cards > .card > .content > .meta + .description {\r\n  margin-top: 0.5em;\r\n  font-size: 2em;\r\n}\r\n\r\n/* For mobile phones: */\r\n[class*=\"col-\"] {\r\n  width: 100%;\r\n}\r\n\r\n@media only screen and (min-width: 600px) {\r\n  /* For tablets: */\r\n  .col-s-1 {\r\n    width: 8.33%;\r\n  }\r\n  .col-s-2 {\r\n    width: 16.66%;\r\n  }\r\n  .col-s-3 {\r\n    width: 25%;\r\n  }\r\n  .col-s-4 {\r\n    width: 33.33%;\r\n  }\r\n  .col-s-5 {\r\n    width: 41.66%;\r\n  }\r\n  .col-s-6 {\r\n    width: 50%;\r\n  }\r\n  .col-s-7 {\r\n    width: 58.33%;\r\n  }\r\n  .col-s-8 {\r\n    width: 66.66%;\r\n  }\r\n  .col-s-9 {\r\n    width: 75%;\r\n  }\r\n  .col-s-10 {\r\n    width: 83.33%;\r\n  }\r\n  .col-s-11 {\r\n    width: 91.66%;\r\n  }\r\n  .col-s-12 {\r\n    width: 100%;\r\n  }\r\n}\r\n\r\n@media only screen and (min-width: 768px) {\r\n  /* For desktop: */\r\n  .col-1 {\r\n    width: 8.33%;\r\n  }\r\n  .col-2 {\r\n    width: 16.66%;\r\n  }\r\n  .col-3 {\r\n    width: 25%;\r\n  }\r\n  .col-4 {\r\n    width: 33.33%;\r\n  }\r\n  .col-5 {\r\n    width: 41.66%;\r\n  }\r\n  .col-6 {\r\n    width: 50%;\r\n  }\r\n  .col-7 {\r\n    width: 58.33%;\r\n  }\r\n  .col-8 {\r\n    width: 66.66%;\r\n  }\r\n  .col-9 {\r\n    width: 75%;\r\n  }\r\n  .col-10 {\r\n    width: 83.33%;\r\n  }\r\n  .col-11 {\r\n    width: 91.66%;\r\n  }\r\n  .col-12 {\r\n    width: 100%;\r\n  }\r\n}\r\n", "",{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA;;EAEE,YAAY;AACd;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,eAAe;AACjB;;AAEA;;EAEE,iBAAiB;AACnB;;AAEA;;;;EAIE,iBAAiB;EACjB,cAAc;AAChB;;AAEA,uBAAuB;AACvB;EACE,WAAW;AACb;;AAEA;EACE,iBAAiB;EACjB;IACE,YAAY;EACd;EACA;IACE,aAAa;EACf;EACA;IACE,UAAU;EACZ;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,UAAU;EACZ;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,UAAU;EACZ;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,WAAW;EACb;AACF;;AAEA;EACE,iBAAiB;EACjB;IACE,YAAY;EACd;EACA;IACE,aAAa;EACf;EACA;IACE,UAAU;EACZ;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,UAAU;EACZ;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,UAAU;EACZ;EACA;IACE,aAAa;EACf;EACA;IACE,aAAa;EACf;EACA;IACE,WAAW;EACb;AACF","file":"App.css","sourcesContent":["html,\r\nbody {\r\n  height: 100%;\r\n}\r\n\r\ncanvas {\r\n  height: 100%;\r\n}\r\n\r\n.large.text {\r\n  font-size: 2rem;\r\n}\r\n\r\n.ui.card > .content > .header:not(.ui),\r\n.ui.cards > .card > .content > .header:not(.ui) {\r\n  font-size: 1.25em;\r\n}\r\n\r\n.ui.card > .content > .header + .description,\r\n.ui.card > .content > .meta + .description,\r\n.ui.cards > .card > .content > .header + .description,\r\n.ui.cards > .card > .content > .meta + .description {\r\n  margin-top: 0.5em;\r\n  font-size: 2em;\r\n}\r\n\r\n/* For mobile phones: */\r\n[class*=\"col-\"] {\r\n  width: 100%;\r\n}\r\n\r\n@media only screen and (min-width: 600px) {\r\n  /* For tablets: */\r\n  .col-s-1 {\r\n    width: 8.33%;\r\n  }\r\n  .col-s-2 {\r\n    width: 16.66%;\r\n  }\r\n  .col-s-3 {\r\n    width: 25%;\r\n  }\r\n  .col-s-4 {\r\n    width: 33.33%;\r\n  }\r\n  .col-s-5 {\r\n    width: 41.66%;\r\n  }\r\n  .col-s-6 {\r\n    width: 50%;\r\n  }\r\n  .col-s-7 {\r\n    width: 58.33%;\r\n  }\r\n  .col-s-8 {\r\n    width: 66.66%;\r\n  }\r\n  .col-s-9 {\r\n    width: 75%;\r\n  }\r\n  .col-s-10 {\r\n    width: 83.33%;\r\n  }\r\n  .col-s-11 {\r\n    width: 91.66%;\r\n  }\r\n  .col-s-12 {\r\n    width: 100%;\r\n  }\r\n}\r\n\r\n@media only screen and (min-width: 768px) {\r\n  /* For desktop: */\r\n  .col-1 {\r\n    width: 8.33%;\r\n  }\r\n  .col-2 {\r\n    width: 16.66%;\r\n  }\r\n  .col-3 {\r\n    width: 25%;\r\n  }\r\n  .col-4 {\r\n    width: 33.33%;\r\n  }\r\n  .col-5 {\r\n    width: 41.66%;\r\n  }\r\n  .col-6 {\r\n    width: 50%;\r\n  }\r\n  .col-7 {\r\n    width: 58.33%;\r\n  }\r\n  .col-8 {\r\n    width: 66.66%;\r\n  }\r\n  .col-9 {\r\n    width: 75%;\r\n  }\r\n  .col-10 {\r\n    width: 83.33%;\r\n  }\r\n  .col-11 {\r\n    width: 91.66%;\r\n  }\r\n  .col-12 {\r\n    width: 100%;\r\n  }\r\n}\r\n"]}]);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
@@ -3740,10 +3754,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var semantic_ui_css_semantic_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! semantic-ui-css/semantic.min.css */ "./node_modules/semantic-ui-css/semantic.min.css");
 /* harmony import */ var semantic_ui_css_semantic_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_css_semantic_min_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _style_App_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../style/App.css */ "./style/App.css");
+/* harmony import */ var _style_App_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_style_App_css__WEBPACK_IMPORTED_MODULE_3__);
 
 var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\pages\\_app.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 // import App from 'next/app'
+
 
 
 
@@ -3753,7 +3770,7 @@ function MyApp(_ref) {
   return __jsx(Component, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 7
     },
     __self: this
   }));
@@ -3771,6 +3788,67 @@ function MyApp(_ref) {
 
 
 /* harmony default export */ __webpack_exports__["default"] = (MyApp);
+
+/***/ }),
+
+/***/ "./style/App.css":
+/*!***********************!*\
+  !*** ./style/App.css ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!../node_modules/postcss-loader/src??__nextjs_postcss!./App.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./style/App.css");
+
+if (typeof content === 'string') {
+  content = [[module.i, content, '']];
+}
+
+var options = {}
+
+options.insert = function(element){// These elements should always exist. If they do not,
+// this code should fail.
+var anchorElement=document.querySelector('#__next_css__DO_NOT_USE__');var parentNode=anchorElement.parentNode;// Normally <head>
+// Each style tag should be placed right before our
+// anchor. By inserting before and not after, we do not
+// need to track the last inserted element.
+parentNode.insertBefore(element,anchorElement)// Remember: this is development only code.
+//
+// After styles are injected, we need to remove the
+// <style> tags that set `body { display: none; }`.
+//
+// We use `requestAnimationFrame` as a way to defer
+// this operation since there may be multiple style
+// tags.
+;(self.requestAnimationFrame||setTimeout)(function(){for(var x=document.querySelectorAll('[data-next-hide-fouc]'),i=x.length;i--;){x[i].parentNode.removeChild(x[i]);}});};
+options.singleton = false;
+
+var update = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+
+if (content.locals) {
+  module.exports = content.locals;
+}
+
+if (true) {
+  if (!content.locals) {
+    module.hot.accept(
+      /*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!../node_modules/postcss-loader/src??__nextjs_postcss!./App.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./style/App.css",
+      function () {
+        var newContent = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js??ref--5-oneOf-5-1!../node_modules/postcss-loader/src??__nextjs_postcss!./App.css */ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./style/App.css");
+
+        if (typeof newContent === 'string') {
+          newContent = [[module.i, newContent, '']];
+        }
+        
+        update(newContent);
+      }
+    )
+  }
+
+  module.hot.dispose(function() { 
+    update();
+  });
+}
 
 /***/ }),
 

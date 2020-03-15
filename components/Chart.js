@@ -21,7 +21,7 @@ const Chart = () => {
   let chartOptions = getChartOptions("line");
   return (
     <div>
-      <Line data={chartData} options={chartOptions} height={130} />
+      <Line data={chartData} options={chartOptions} />
     </div>
   );
 };

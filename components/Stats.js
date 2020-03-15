@@ -16,9 +16,16 @@ const Stats = React.memo(({ url }) => {
 
   const items = [
     {
-      header: "Coronavirus Cases",
+      header: "Total",
       description: `${numberWithCommas(stats.confirmed.value)}`,
       color: "grey",
+      meta: "",
+      width: "10"
+    },
+    {
+      header: "Recovered",
+      color: "green",
+      description: `${numberWithCommas(stats.recovered.value)}`,
       meta: ""
     },
     {
@@ -26,18 +33,12 @@ const Stats = React.memo(({ url }) => {
       color: "red",
       description: `${numberWithCommas(stats.deaths.value)}`,
       meta: ""
-    },
-    {
-      header: "Recovered",
-      color: "green",
-      description: `${numberWithCommas(stats.recovered.value)}`,
-      meta: ""
     }
   ];
 
   return (
     <>
-      <Card.Group itemsPerRow={3} items={items} />
+      <Card.Group stackable={true} itemsPerRow={3} items={items} />
     </>
   );
 });

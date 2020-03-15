@@ -4,8 +4,9 @@ import { Card, Dropdown } from "semantic-ui-react";
 import { numberWithCommas } from "../utils/format";
 
 const StateStats = ({ country }) => {
+  //console.log("state stats =>", country);
   if (country === "world") {
-    return <p>Select country to see state wise data</p>;
+    return <h3>Select country above to see state wise data</h3>;
   }
 
   const [selectedState, setSelectedState] = useState(undefined);
@@ -29,7 +30,7 @@ const StateStats = ({ country }) => {
       </h3>
     );
 
-  console.log("State wise info", states);
+  //console.log("State wise info", states);
 
   let stateOptions = states.map(({ provinceState, countryRegion }, index) => ({
     key: provinceState || countryRegion,
@@ -39,7 +40,7 @@ const StateStats = ({ country }) => {
 
   const onChange = selectedValue => {
     let selected = states.find(state => state.provinceState === selectedValue);
-    console.log("Selected state info", selected);
+    // console.log("Selected state info", selected);
     if (!selected) {
       selected = states[0];
     }
@@ -61,9 +62,9 @@ const StateStats = ({ country }) => {
       />
       <br />
       {selectedState && (
-        <Card.Group itemsPerRow={4}>
+        <Card.Group stackable={true} itemsPerRow={4}>
           <Card
-            header='Confirmed'
+            header='Total'
             description={
               selectedState && numberWithCommas(selectedState.confirmed)
             }

@@ -11,3 +11,5 @@ https://covid19.mathdro.id/api/daily
 https://covid19.mathdro.id/api/countries/usa
 
 https://covid19.mathdro.id/api/countries/usa/confirmed
+
+https://github.com/mathdroid/covid-19-api/issues/20

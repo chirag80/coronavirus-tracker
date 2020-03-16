@@ -86369,6 +86369,7 @@ var getChartOptions = function getChartOptions(type) {
     },
     title: {
       display: "Display",
+      fontSize: 20,
       text: "Coronavirs Cases - Overall Stats"
     }
   };
@@ -86382,7 +86383,8 @@ var xAxes = [{
   },
   scaleLabel: {
     display: true,
-    labelString: "Date (Last 40 days)"
+    labelString: "Date (Last 40 days)",
+    fontSize: 15
   },
   ticks: {
     major: {
@@ -86404,7 +86406,8 @@ var xAxes = [{
 var yAxes = [{
   scaleLabel: {
     display: true,
-    labelString: "Number of cases (in thousands)"
+    labelString: "Number of cases (in thousands)",
+    fontSize: 15
   },
   ticks: {
     beginAtZero: true,

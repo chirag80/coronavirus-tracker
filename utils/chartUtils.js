@@ -95,7 +95,7 @@ const getChartDate = (chartType, apiData) => {
 const getChartOptions = type => {
   return {
     responsive: true,
-    height: 400,
+    maintainAspectRatio: false,
     legend: {
       position: "top",
       labels: {

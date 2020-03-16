@@ -146,6 +146,10 @@ const Chart = () => {
   let chartData = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartDate"])("line", stats);
   let chartOptions = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartOptions"])("line");
   return __jsx("div", {
+    id: "chartDiv",
+    style: {
+      minHeight: "450px"
+    },
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23
@@ -566,6 +570,8 @@ const Index = () => {
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+    stackable: true,
+    stretched: true,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
@@ -584,7 +590,8 @@ const Index = () => {
       lineNumber: 39
     },
     __self: undefined
-  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"], {
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
+    as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40
@@ -633,20 +640,20 @@ const Index = () => {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 54
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 55
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 56
     },
     __self: undefined
   }, memoStateStats)))));
@@ -758,7 +765,7 @@ const getChartDate = (chartType, apiData) => {
 const getChartOptions = type => {
   return {
     responsive: true,
-    height: 400,
+    maintainAspectRatio: false,
     legend: {
       position: "top",
       labels: {
@@ -885,7 +892,7 @@ __webpack_require__.r(__webpack_exports__);
   }, []);
 
   const getStats = async () => {
-    console.log("UseFetch invoked:", url);
+    //console.log("UseFetch invoked:", url);
     let data;
 
     try {

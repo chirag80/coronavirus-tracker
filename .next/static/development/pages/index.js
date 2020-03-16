@@ -52,6 +52,10 @@ var Chart = function Chart() {
   var chartData = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartDate"])("line", stats);
   var chartOptions = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartOptions"])("line");
   return __jsx("div", {
+    id: "chartDiv",
+    style: {
+      minHeight: "450px"
+    },
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23
@@ -86129,6 +86133,8 @@ var Index = function Index() {
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+    stackable: true,
+    stretched: true,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
@@ -86147,7 +86153,8 @@ var Index = function Index() {
       lineNumber: 39
     },
     __self: this
-  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"], {
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
+    as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40
@@ -86196,20 +86203,20 @@ var Index = function Index() {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 54
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 60
+      lineNumber: 55
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 56
     },
     __self: this
   }, memoStateStats)))));
@@ -86333,7 +86340,7 @@ var getChartDate = function getChartDate(chartType, apiData) {
 var getChartOptions = function getChartOptions(type) {
   return {
     responsive: true,
-    height: 400,
+    maintainAspectRatio: false,
     legend: {
       position: "top",
       labels: {
@@ -86469,37 +86476,36 @@ __webpack_require__.r(__webpack_exports__);
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("UseFetch invoked:", url);
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 0;
+            _context.next = 3;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch(url));
 
-          case 4:
+          case 3:
             response = _context.sent;
-            _context.next = 7;
+            _context.next = 6;
             return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(response.json());
 
-          case 7:
+          case 6:
             data = _context.sent;
             if (isCurrent.current) setStats(data);
-            _context.next = 15;
+            _context.next = 14;
             break;
 
-          case 11:
-            _context.prev = 11;
-            _context.t0 = _context["catch"](1);
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](0);
             setError(_context.t0);
             setStats(null);
 
-          case 15:
+          case 14:
             if (isCurrent.current) setLoading(false);
 
-          case 16:
+          case 15:
           case "end":
             return _context.stop();
         }
       }
-    }, null, null, [[1, 11]], Promise);
+    }, null, null, [[0, 10]], Promise);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {

@@ -34,12 +34,12 @@ const Index = () => {
 
   return (
     <Container>
-      <Grid>
+      <Grid stackable={true} stretched={true}>
         <Grid.Row stretched>
           <Grid.Column>
-            <Segment>
+            <Responsive as={Segment}>
               <Chart />
-            </Segment>
+            </Responsive>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row stretched>
@@ -49,17 +49,11 @@ const Index = () => {
               <br />
               {memoStatsComponent}
             </Responsive>
-            {/* <Segment>
-              <CountrySelector onChange={onChange} />
-              <br />
-              {memoStatsComponent}
-            </Segment> */}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row stretched>
           <Grid.Column>
             <Responsive as={Segment}>{memoStateStats}</Responsive>
-            {/* <Segment>{memoStateStats}</Segment> */}
           </Grid.Column>
         </Grid.Row>
       </Grid>

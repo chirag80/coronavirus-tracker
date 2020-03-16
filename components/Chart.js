@@ -20,7 +20,7 @@ const Chart = () => {
   let chartData = getChartDate("line", stats);
   let chartOptions = getChartOptions("line");
   return (
-    <div>
+    <div id='chartDiv' style={{ minHeight: "450px" }}>
       <Line data={chartData} options={chartOptions} />
     </div>
   );

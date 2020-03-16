@@ -14,7 +14,7 @@ export default url => {
   }, []);
 
   const getStats = async () => {
-    console.log("UseFetch invoked:", url);
+    //console.log("UseFetch invoked:", url);
     let data;
     try {
       let response = await fetch(url);

@@ -1,5 +1,5 @@
 # coronavirus-tracker
-This react/next.js app is developed as part of my learning.
+This react/next.js app is developed as part of my learning of some new features of React/Next.js
 
 App is deployed on netlify - https://covid19-tracker.netlify.com/
 

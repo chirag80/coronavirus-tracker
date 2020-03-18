@@ -88,10 +88,83 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/BarChart.js":
+/*!********************************!*\
+  !*** ./components/BarChart.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-chartjs-2 */ "react-chartjs-2");
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_chartUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/chartUtils */ "./utils/chartUtils.js");
+var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\components\\BarChart.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const BarChart = ({
+  selectedState
+}) => {
+  const {
+    0: locations,
+    1: setLocations
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const {
+    0: chartData,
+    1: setChartData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const {
+    0: chartOptinos,
+    1: setChartOptions
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+
+  const getData = async () => {
+    let response = await fetch("https://coronavirus-tracker-api.herokuapp.com/confirmed");
+    let data = await response.json();
+    console.log("useEffect bar chart", data.locations);
+    setLocations(data.locations);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    getData();
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (Object.keys(locations).length > 0) {
+      setChartData(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_2__["getBarChartData"])(locations, selectedState));
+      setChartOptions(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_2__["getBarChartOptions"])());
+    }
+  }, [selectedState, locations]);
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: undefined
+  }), __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Bar"], {
+    data: chartData,
+    options: chartOptinos,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: undefined
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BarChart);
+
+/***/ }),
 
 /***/ "./components/Chart.js":
 /*!*****************************!*\
@@ -143,7 +216,7 @@ const Chart = () => {
     },
     __self: undefined
   }, "No data found. Chart API error => ", stats.error.message);
-  let chartData = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartDate"])("line", stats);
+  let chartData = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartData"])("line", stats);
   let chartOptions = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartOptions"])("line");
   return __jsx("div", {
     id: "chartDiv",
@@ -263,6 +336,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! semantic-ui-react */ "semantic-ui-react");
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _utils_format__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/format */ "./utils/format.js");
+/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BarChart */ "./components/BarChart.js");
 var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\components\\StateStats.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -270,15 +344,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
 const StateStats = ({
-  country
+  iso3,
+  iso2
 }) => {
   //console.log("state stats =>", country);
-  if (country === "world") {
+  if (iso3 === "") {
     return __jsx("h3", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 9
+        lineNumber: 10
       },
       __self: undefined
     }, "Select country above to see state wise data");
@@ -288,32 +364,40 @@ const StateStats = ({
     0: selectedState,
     1: setSelectedState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined);
+  const memoBarChartComp = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => __jsx(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    selectedState: selectedState,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }), [selectedState]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     setSelectedState(undefined);
-  }, [country]);
+  }, [iso3]);
   const {
     stats: states,
     loading,
     error
-  } = Object(_utils_useFetch__WEBPACK_IMPORTED_MODULE_1__["default"])(`https://covid19.mathdro.id/api/countries/${country}/confirmed`);
+  } = Object(_utils_useFetch__WEBPACK_IMPORTED_MODULE_1__["default"])(`https://covid19.mathdro.id/api/countries/${iso3}/confirmed`);
   if (loading) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 28
     },
     __self: undefined
   }, "Loading States of selected country...");
   if (error) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 30
     },
     __self: undefined
   }, "Retrieving states API Error => ", error.toString());
   if (states.error) return __jsx("h3", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 34
     },
     __self: undefined
   }, "No data found. Retrieving states API error => ", stats.error.message); //console.log("State wise info", states);
@@ -349,21 +433,21 @@ const StateStats = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 58
     },
     __self: undefined
-  }), __jsx("br", {
+  }), selectedState && __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 71
     },
     __self: undefined
-  }), selectedState && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"].Group, {
+  }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"].Group, {
     stackable: true,
     itemsPerRow: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 72
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -373,7 +457,7 @@ const StateStats = ({
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 73
     },
     __self: undefined
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -383,7 +467,7 @@ const StateStats = ({
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 81
     },
     __self: undefined
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -393,7 +477,7 @@ const StateStats = ({
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 89
     },
     __self: undefined
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -403,10 +487,10 @@ const StateStats = ({
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 97
     },
     __self: undefined
-  })));
+  }))), selectedState && memoBarChartComp);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (StateStats);
@@ -437,6 +521,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 const Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(({
   url
 }) => {
+  //console.log("Stats=>", url);
   const {
     stats,
     loading,
@@ -446,21 +531,21 @@ const Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(({
   if (loading) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 11
     },
     __self: undefined
   }, "Loading Stats...");
   if (error) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 13
     },
     __self: undefined
   }, "API Error => ", error.toString());
   if (stats.error) return __jsx("h3", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 16
     },
     __self: undefined
   }, "No data found. API error => ", stats.error.message);
@@ -487,7 +572,7 @@ const Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(({
     items: items,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 42
     },
     __self: undefined
   }));
@@ -532,7 +617,10 @@ const Index = () => {
   const {
     0: selectedCountry,
     1: setSelected
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("world");
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    iso2: "",
+    iso3: ""
+  });
   const memoStatsComponent = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => __jsx(_components_Stats__WEBPACK_IMPORTED_MODULE_2__["default"], {
     url: url,
     __source: {
@@ -542,31 +630,35 @@ const Index = () => {
     __self: undefined
   }), [url]);
   const memoStateStats = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => __jsx(_components_StateStats__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    country: selectedCountry,
+    iso3: selectedCountry.iso3,
+    iso2: selectedCountry.iso3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 18
     },
     __self: undefined
   }), [selectedCountry]);
 
-  const onChange = (country, iso3) => {
-    //console.log("country=>", country, "iso3=>", iso3);
-    //this is to load state dropdown
-    setSelected(iso3);
+  const onChange = (iso2, iso3) => {
+    //console.log("iso2=>", iso2, "iso3=>", iso3);
+    //this is to load state dropdown for StateStats
+    setSelected({
+      iso2,
+      iso3
+    });
 
-    if (country === "world") {
+    if (iso2 === "world") {
       setUrl("https://covid19.mathdro.id/api");
     } else {
       //this is to load statistics of selected country. country is iso2 code
-      setUrl(`https://covid19.mathdro.id/api/countries/${country}`);
+      setUrl(`https://covid19.mathdro.id/api/countries/${iso2}`);
     }
   };
 
   return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 38
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
@@ -574,86 +666,86 @@ const Index = () => {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 39
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 40
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 41
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 42
     },
     __self: undefined
   }, __jsx(_components_Chart__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 43
     },
     __self: undefined
   })))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 48
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 49
     },
     __self: undefined
   }, __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: onChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 50
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 51
     },
     __self: undefined
   }), memoStatsComponent))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 56
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 57
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 58
     },
     __self: undefined
   }, memoStateStats)))));
@@ -667,14 +759,71 @@ const Index = () => {
 /*!*****************************!*\
   !*** ./utils/chartUtils.js ***!
   \*****************************/
-/*! exports provided: getChartDate, getChartOptions */
+/*! exports provided: getChartData, getChartOptions, getBarChartData, getBarChartOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChartDate", function() { return getChartDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChartData", function() { return getChartData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChartOptions", function() { return getChartOptions; });
-const getChartDate = (chartType, apiData) => {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarChartData", function() { return getBarChartData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarChartOptions", function() { return getBarChartOptions; });
+const getBarChartData = (apiData, selectedState) => {
+  console.log("Locations in chart utils", apiData, selectedState);
+  const list = apiData.filter(x => x.country_code === selectedState.iso2);
+  const record = list.length > 1 ? list.find(x => x.province === selectedState.provinceState) : list[0];
+  console.log("record", record);
+  const sorted = Object.keys(record.history).sort((a, b) => new Date(a) - new Date(b));
+  const labels = sorted.slice(-15);
+  return {
+    labels,
+    datasets: [{
+      label: "Daily cases",
+      backgroundColor: "#ff8c00",
+      borderColor: "#ff8c00",
+      borderWidth: 1,
+      hoverBackgroundColor: "#ffa500",
+      hoverBorderColor: "#ffa500",
+      data: labels.map(label => record.history[label])
+    }]
+  };
+};
+
+const getBarChartOptions = () => {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      mode: "index",
+      callbacks: {
+        label: function (tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label || "";
+
+          if (label) {
+            label += ": ";
+          }
+
+          label += tooltipItem.yLabel.toLocaleString();
+          return label;
+        }
+      }
+    },
+    scales: {
+      xAxes: xAxesBar,
+      yAxes: yAxesBar
+    },
+    title: {
+      display: "Display",
+      fontSize: 15,
+      text: "Daily New Cases"
+    }
+  };
+};
+
+const getChartData = (chartType, apiData) => {
   //console.log("Api data", apiData.slice(-10));
   let sliced = apiData.slice(-40);
   return {
@@ -841,6 +990,47 @@ const yAxes = [{
     }
   }
 }];
+const xAxesBar = [{
+  type: "time",
+  offset: true,
+  distribution: "series",
+  gridLines: {
+    display: false
+  },
+  scaleLabel: {
+    display: true,
+    labelString: "Date (Last 15 days)",
+    fontSize: 15
+  },
+  ticks: {
+    major: {
+      enabled: true
+    },
+    source: "data",
+    autoSkip: true,
+    autoSkipPadding: 0,
+    maxRotation: 50
+  },
+  time: {
+    tooltipFormat: "MMM DD",
+    displayFormats: {
+      month: "MMM DD"
+    }
+  }
+}];
+const yAxesBar = [{
+  scaleLabel: {
+    display: true,
+    labelString: "Number of cases (in thousands)",
+    fontSize: 15
+  },
+  ticks: {
+    beginAtZero: true,
+    userCallback: function (value, index, values) {
+      return value.toLocaleString(); // this is all we need
+    }
+  }
+}];
 
 
 /***/ }),
@@ -933,7 +1123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

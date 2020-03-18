@@ -1,7 +1,7 @@
 import React from "react";
 import useFetch from "../utils/useFetch";
 import { Line } from "react-chartjs-2";
-import { getChartDate, getChartOptions } from "../utils/chartUtils";
+import { getChartData, getChartOptions } from "../utils/chartUtils";
 
 const Chart = () => {
   const { stats, loading, error } = useFetch(
@@ -17,7 +17,7 @@ const Chart = () => {
   if (stats.error)
     return <h3>No data found. Chart API error => {stats.error.message}</h3>;
 
-  let chartData = getChartDate("line", stats);
+  let chartData = getChartData("line", stats);
   let chartOptions = getChartOptions("line");
   return (
     <div id='chartDiv' style={{ minHeight: "450px" }}>

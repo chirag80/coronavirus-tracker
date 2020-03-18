@@ -1,5 +1,99 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\index.js"],{
 
+/***/ "./components/BarChart.js":
+/*!********************************!*\
+  !*** ./components/BarChart.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
+/* harmony import */ var _utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/chartUtils */ "./utils/chartUtils.js");
+
+var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\components\\BarChart.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
+
+
+
+var BarChart = function BarChart(_ref) {
+  var selectedState = _ref.selectedState;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
+      locations = _useState[0],
+      setLocations = _useState[1];
+
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
+      chartData = _useState2[0],
+      setChartData = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
+      chartOptinos = _useState3[0],
+      setChartOptions = _useState3[1];
+
+  var getData = function getData() {
+    var response, data;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getData$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("https://coronavirus-tracker-api.herokuapp.com/confirmed"));
+
+          case 2:
+            response = _context.sent;
+            _context.next = 5;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(response.json());
+
+          case 5:
+            data = _context.sent;
+            console.log("useEffect bar chart", data.locations);
+            setLocations(data.locations);
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, null, null, null, Promise);
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    getData();
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (Object.keys(locations).length > 0) {
+      setChartData(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getBarChartData"])(locations, selectedState));
+      setChartOptions(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getBarChartOptions"])());
+    }
+  }, [selectedState, locations]);
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: this
+  }), __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__["Bar"], {
+    data: chartData,
+    options: chartOptinos,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: this
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BarChart);
+
+/***/ }),
+
 /***/ "./components/Chart.js":
 /*!*****************************!*\
   !*** ./components/Chart.js ***!
@@ -49,7 +143,7 @@ var Chart = function Chart() {
     },
     __self: this
   }, "No data found. Chart API error => ", stats.error.message);
-  var chartData = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartDate"])("line", stats);
+  var chartData = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartData"])("line", stats);
   var chartOptions = Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getChartOptions"])("line");
   return __jsx("div", {
     id: "chartDiv",
@@ -175,6 +269,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_useFetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/useFetch */ "./utils/useFetch.js");
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 /* harmony import */ var _utils_format__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/format */ "./utils/format.js");
+/* harmony import */ var _BarChart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BarChart */ "./components/BarChart.js");
 var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\components\\StateStats.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -182,15 +277,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
 var StateStats = function StateStats(_ref) {
-  var country = _ref.country;
+  var iso3 = _ref.iso3,
+      iso2 = _ref.iso2;
 
   //console.log("state stats =>", country);
-  if (country === "world") {
+  if (iso3 === "") {
     return __jsx("h3", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 9
+        lineNumber: 10
       },
       __self: this
     }, "Select country above to see state wise data");
@@ -200,11 +297,21 @@ var StateStats = function StateStats(_ref) {
       selectedState = _useState[0],
       setSelectedState = _useState[1];
 
+  var memoBarChartComp = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
+    return __jsx(_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      selectedState: selectedState,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 16
+      },
+      __self: this
+    });
+  }, [selectedState]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setSelectedState(undefined);
-  }, [country]);
+  }, [iso3]);
 
-  var _useFetch = Object(_utils_useFetch__WEBPACK_IMPORTED_MODULE_1__["default"])("https://covid19.mathdro.id/api/countries/".concat(country, "/confirmed")),
+  var _useFetch = Object(_utils_useFetch__WEBPACK_IMPORTED_MODULE_1__["default"])("https://covid19.mathdro.id/api/countries/".concat(iso3, "/confirmed")),
       states = _useFetch.stats,
       loading = _useFetch.loading,
       error = _useFetch.error;
@@ -212,21 +319,21 @@ var StateStats = function StateStats(_ref) {
   if (loading) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 28
     },
     __self: this
   }, "Loading States of selected country...");
   if (error) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 30
     },
     __self: this
   }, "Retrieving states API Error => ", error.toString());
   if (states.error) return __jsx("h3", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 34
     },
     __self: this
   }, "No data found. Retrieving states API error => ", stats.error.message); //console.log("State wise info", states);
@@ -265,21 +372,21 @@ var StateStats = function StateStats(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 58
     },
     __self: this
-  }), __jsx("br", {
+  }), selectedState && __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 71
     },
     __self: this
-  }), selectedState && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"].Group, {
+  }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"].Group, {
     stackable: true,
     itemsPerRow: 4,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 72
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -289,7 +396,7 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 73
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -299,7 +406,7 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 81
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -309,7 +416,7 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 89
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_2__["Card"], {
@@ -319,10 +426,10 @@ var StateStats = function StateStats(_ref) {
     meta: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 97
     },
     __self: this
-  })));
+  }))), selectedState && memoBarChartComp);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (StateStats);
@@ -352,6 +459,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 var Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   var url = _ref.url;
 
+  //console.log("Stats=>", url);
   var _useFetch = Object(_utils_useFetch__WEBPACK_IMPORTED_MODULE_1__["default"])(url),
       stats = _useFetch.stats,
       loading = _useFetch.loading,
@@ -361,21 +469,21 @@ var Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   if (loading) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10
+      lineNumber: 11
     },
     __self: this
   }, "Loading Stats...");
   if (error) return __jsx("p", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 13
     },
     __self: this
   }, "API Error => ", error.toString());
   if (stats.error) return __jsx("h3", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 16
     },
     __self: this
   }, "No data found. API error => ", stats.error.message);
@@ -402,7 +510,7 @@ var Stats = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
     items: items,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 42
     },
     __self: this
   }));
@@ -86088,7 +86196,10 @@ var Index = function Index() {
       url = _useState[0],
       setUrl = _useState[1];
 
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("world"),
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    iso2: "",
+    iso3: ""
+  }),
       selectedCountry = _useState2[0],
       setSelected = _useState2[1];
 
@@ -86104,32 +86215,36 @@ var Index = function Index() {
   }, [url]);
   var memoStateStats = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
     return __jsx(_components_StateStats__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      country: selectedCountry,
+      iso3: selectedCountry.iso3,
+      iso2: selectedCountry.iso3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 18
       },
       __self: this
     });
   }, [selectedCountry]);
 
-  var onChange = function onChange(country, iso3) {
-    //console.log("country=>", country, "iso3=>", iso3);
-    //this is to load state dropdown
-    setSelected(iso3);
+  var onChange = function onChange(iso2, iso3) {
+    //console.log("iso2=>", iso2, "iso3=>", iso3);
+    //this is to load state dropdown for StateStats
+    setSelected({
+      iso2: iso2,
+      iso3: iso3
+    });
 
-    if (country === "world") {
+    if (iso2 === "world") {
       setUrl("https://covid19.mathdro.id/api");
     } else {
       //this is to load statistics of selected country. country is iso2 code
-      setUrl("https://covid19.mathdro.id/api/countries/".concat(country));
+      setUrl("https://covid19.mathdro.id/api/countries/".concat(iso2));
     }
   };
 
   return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 38
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
@@ -86137,86 +86252,86 @@ var Index = function Index() {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 39
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 40
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 41
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 42
     },
     __self: this
   }, __jsx(_components_Chart__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 43
     },
     __self: this
   })))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 47
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 48
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 49
     },
     __self: this
   }, __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: onChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 50
     },
     __self: this
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 51
     },
     __self: this
   }), memoStatsComponent))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 56
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 57
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 58
     },
     __self: this
   }, memoStateStats)))));
@@ -86230,17 +86345,82 @@ var Index = function Index() {
 /*!*****************************!*\
   !*** ./utils/chartUtils.js ***!
   \*****************************/
-/*! exports provided: getChartDate, getChartOptions */
+/*! exports provided: getChartData, getChartOptions, getBarChartData, getBarChartOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChartDate", function() { return getChartDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChartData", function() { return getChartData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChartOptions", function() { return getChartOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarChartData", function() { return getBarChartData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarChartOptions", function() { return getBarChartOptions; });
 /* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 
 
-var getChartDate = function getChartDate(chartType, apiData) {
+var getBarChartData = function getBarChartData(apiData, selectedState) {
+  console.log("Locations in chart utils", apiData, selectedState);
+  var list = apiData.filter(function (x) {
+    return x.country_code === selectedState.iso2;
+  });
+  var record = list.length > 1 ? list.find(function (x) {
+    return x.province === selectedState.provinceState;
+  }) : list[0];
+  console.log("record", record);
+  var sorted = Object.keys(record.history).sort(function (a, b) {
+    return new Date(a) - new Date(b);
+  });
+  var labels = sorted.slice(-15);
+  return {
+    labels: labels,
+    datasets: [{
+      label: "Daily cases",
+      backgroundColor: "#ff8c00",
+      borderColor: "#ff8c00",
+      borderWidth: 1,
+      hoverBackgroundColor: "#ffa500",
+      hoverBorderColor: "#ffa500",
+      data: labels.map(function (label) {
+        return record.history[label];
+      })
+    }]
+  };
+};
+
+var getBarChartOptions = function getBarChartOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      mode: "index",
+      callbacks: {
+        label: function label(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label || "";
+
+          if (label) {
+            label += ": ";
+          }
+
+          label += tooltipItem.yLabel.toLocaleString();
+          return label;
+        }
+      }
+    },
+    scales: {
+      xAxes: xAxesBar,
+      yAxes: yAxesBar
+    },
+    title: {
+      display: "Display",
+      fontSize: 15,
+      text: "Daily New Cases"
+    }
+  };
+};
+
+var getChartData = function getChartData(chartType, apiData) {
   var _ref;
 
   //console.log("Api data", apiData.slice(-10));
@@ -86416,6 +86596,47 @@ var yAxes = [{
     }
   }
 }];
+var xAxesBar = [{
+  type: "time",
+  offset: true,
+  distribution: "series",
+  gridLines: {
+    display: false
+  },
+  scaleLabel: {
+    display: true,
+    labelString: "Date (Last 15 days)",
+    fontSize: 15
+  },
+  ticks: {
+    major: {
+      enabled: true
+    },
+    source: "data",
+    autoSkip: true,
+    autoSkipPadding: 0,
+    maxRotation: 50
+  },
+  time: {
+    tooltipFormat: "MMM DD",
+    displayFormats: {
+      month: "MMM DD"
+    }
+  }
+}];
+var yAxesBar = [{
+  scaleLabel: {
+    display: true,
+    labelString: "Number of cases (in thousands)",
+    fontSize: 15
+  },
+  ticks: {
+    beginAtZero: true,
+    userCallback: function userCallback(value, index, values) {
+      return value.toLocaleString(); // this is all we need
+    }
+  }
+}];
 
 
 /***/ }),
@@ -86534,7 +86755,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!*************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=C%3A%5CLearning%5Ccoronavirus-tracker%5Cpages%5Cindex.js ***!
   \*************************************************************************************************************************/
@@ -86557,5 +86778,5 @@ module.exports = dll_0fb095e325d7ebf261c3;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map

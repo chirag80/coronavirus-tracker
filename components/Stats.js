@@ -4,6 +4,7 @@ import { Card } from "semantic-ui-react";
 import { numberWithCommas } from "../utils/format";
 
 const Stats = React.memo(({ url }) => {
+  //console.log("Stats=>", url);
   const { stats, loading, error } = useFetch(url);
   //console.log("Stats component loading", stats, loading, error);
 

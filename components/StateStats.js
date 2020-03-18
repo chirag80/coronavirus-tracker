@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import useFetch from "../utils/useFetch";
 import { Card, Dropdown } from "semantic-ui-react";
 import { numberWithCommas } from "../utils/format";
+import BarChart from "./BarChart";
 
-const StateStats = ({ country }) => {
+const StateStats = ({ iso3, iso2 }) => {
   //console.log("state stats =>", country);
-  if (country === "world") {
+  if (iso3 === "") {
     return <h3>Select country above to see state wise data</h3>;
   }
 
   const [selectedState, setSelectedState] = useState(undefined);
 
+  const memoBarChartComp = useMemo(
+    () => <BarChart selectedState={selectedState} />,
+    [selectedState]
+  );
+
   useEffect(() => {
     setSelectedState(undefined);
-  }, [country]);
+  }, [iso3]);
 
   const { stats: states, loading, error } = useFetch(
-    `https://covid19.mathdro.id/api/countries/${country}/confirmed`
+    `https://covid19.mathdro.id/api/countries/${iso3}/confirmed`
   );
 
   if (loading) return <p>Loading States of selected country...</p>;
@@ -60,43 +66,46 @@ const StateStats = ({ country }) => {
           onChange(data.value);
         }}
       />
-      <br />
       {selectedState && (
-        <Card.Group stackable={true} itemsPerRow={4}>
-          <Card
-            header='Total'
-            description={
-              selectedState && numberWithCommas(selectedState.confirmed)
-            }
-            color='grey'
-            meta=''
-          />
-          <Card
-            header='Active'
-            description={
-              selectedState && numberWithCommas(selectedState.active)
-            }
-            color='blue'
-            meta=''
-          />
-          <Card
-            header='Recovered'
-            description={
-              selectedState && numberWithCommas(selectedState.recovered)
-            }
-            color='green'
-            meta=''
-          />
-          <Card
-            header='Deaths'
-            description={
-              selectedState && numberWithCommas(selectedState.deaths)
-            }
-            color='red'
-            meta=''
-          />
-        </Card.Group>
+        <>
+          <br />
+          <Card.Group stackable={true} itemsPerRow={4}>
+            <Card
+              header='Total'
+              description={
+                selectedState && numberWithCommas(selectedState.confirmed)
+              }
+              color='grey'
+              meta=''
+            />
+            <Card
+              header='Active'
+              description={
+                selectedState && numberWithCommas(selectedState.active)
+              }
+              color='blue'
+              meta=''
+            />
+            <Card
+              header='Recovered'
+              description={
+                selectedState && numberWithCommas(selectedState.recovered)
+              }
+              color='green'
+              meta=''
+            />
+            <Card
+              header='Deaths'
+              description={
+                selectedState && numberWithCommas(selectedState.deaths)
+              }
+              color='red'
+              meta=''
+            />
+          </Card.Group>
+        </>
       )}
+      {selectedState && memoBarChartComp}
     </>
   );
 };

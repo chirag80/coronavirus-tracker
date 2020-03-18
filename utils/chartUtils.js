@@ -1,4 +1,68 @@
-const getChartDate = (chartType, apiData) => {
+const getBarChartData = (apiData, selectedState) => {
+  console.log("Locations in chart utils", apiData, selectedState);
+  const list = apiData.filter(x => x.country_code === selectedState.iso2);
+  const record =
+    list.length > 1
+      ? list.find(x => x.province === selectedState.provinceState)
+      : list[0];
+
+  console.log("record", record);
+
+  const sorted = Object.keys(record.history).sort(
+    (a, b) => new Date(a) - new Date(b)
+  );
+
+  const labels = sorted.slice(-15);
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: "Daily cases",
+        backgroundColor: "#ff8c00",
+        borderColor: "#ff8c00",
+        borderWidth: 1,
+        hoverBackgroundColor: "#ffa500",
+        hoverBorderColor: "#ffa500",
+        data: labels.map(label => record.history[label])
+      }
+    ]
+  };
+};
+
+const getBarChartOptions = () => {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      mode: "index",
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var label = data.datasets[tooltipItem.datasetIndex].label || "";
+          if (label) {
+            label += ": ";
+          }
+          label += tooltipItem.yLabel.toLocaleString();
+          return label;
+        }
+      }
+    },
+    scales: {
+      xAxes: xAxesBar,
+      yAxes: yAxesBar
+    },
+    title: {
+      display: "Display",
+      fontSize: 15,
+      text: "Daily New Cases"
+    }
+  };
+};
+
+const getChartData = (chartType, apiData) => {
   //console.log("Api data", apiData.slice(-10));
   let sliced = apiData.slice(-40);
 
@@ -174,4 +238,52 @@ const yAxes = [
     }
   }
 ];
-export { getChartDate, getChartOptions };
+
+const xAxesBar = [
+  {
+    type: "time",
+    offset: true,
+    distribution: "series",
+    gridLines: {
+      display: false
+    },
+    scaleLabel: {
+      display: true,
+      labelString: "Date (Last 15 days)",
+      fontSize: 15
+    },
+    ticks: {
+      major: {
+        enabled: true
+      },
+      source: "data",
+      autoSkip: true,
+      autoSkipPadding: 0,
+      maxRotation: 50
+    },
+    time: {
+      tooltipFormat: "MMM DD",
+      displayFormats: {
+        month: "MMM DD"
+      }
+    }
+  }
+];
+
+const yAxesBar = [
+  {
+    scaleLabel: {
+      display: true,
+      labelString: "Number of cases (in thousands)",
+      fontSize: 15
+    },
+    ticks: {
+      beginAtZero: true,
+      userCallback: function(value, index, values) {
+        return value.toLocaleString(); // this is all we need
+      }
+    }
+  }
+];
+
+export { getChartData, getChartOptions, getBarChartData, getBarChartOptions };

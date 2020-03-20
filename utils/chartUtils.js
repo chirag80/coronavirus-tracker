@@ -35,7 +35,7 @@ const getBarChartData = (apiData, selectedState) => {
 
 const getBarChartOptions = selectedState => {
   return {
-    responsive: true,
+    responsive: false,
     maintainAspectRatio: false,
     legend: {
       display: false
@@ -285,7 +285,7 @@ const yAxesBar = [
     ticks: {
       beginAtZero: true,
       userCallback: function(value, index, values) {
-        return value.toLocaleString(); // this is all we need
+        return value.toLocaleString(); //  this is all we need
       }
     }
   }

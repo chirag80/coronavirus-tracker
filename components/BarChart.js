@@ -13,7 +13,7 @@ const BarChart = ({ selectedState }) => {
       "https://coronavirus-tracker-api.herokuapp.com/confirmed"
     );
     let data = await response.json();
-    //console.log("useEffect bar chart", data.locations);
+    // console.log("useEffect bar chart", data.locations);
     setLoading(false);
     setLocations(data.locations);
   };
@@ -32,8 +32,8 @@ const BarChart = ({ selectedState }) => {
   if (loading) return <> Loading Bar chart..</>;
   return (
     <>
-      <div>
-        <Bar height={125} data={chartData} options={chartOptinos} />
+      <div id='barChartDiv' style={{ minHeight: "451px" }}>
+        <Bar height={126} data={chartData} options={chartOptinos} />
       </div>
     </>
   );

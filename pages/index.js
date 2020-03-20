@@ -71,108 +71,106 @@ const Index = () => {
         <Grid.Row stretched>
           <Grid.Column>
             <Responsive as={Segment}>
-              <Button.Group>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(data.children, "US", "USA");
-                  }}
-                  color='blue'
-                >
-                  New Jersey
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(data.children, "US", "USA");
-                  }}
-                  color='blue'
-                >
-                  New York
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(data.children, "US", "USA");
-                  }}
-                  color='blue'
-                >
-                  California
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(data.children, "US", "USA");
-                  }}
-                  color='blue'
-                >
-                  Washington
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(data.children, "US", "USA");
-                  }}
-                  color='blue'
-                >
-                  Massachusetts
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(undefined, "IN", "India");
-                  }}
-                  color='blue'
-                >
-                  India
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(undefined, "IT", "Italy");
-                  }}
-                  color='blue'
-                >
-                  Italy
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(undefined, "IR", "Iran");
-                  }}
-                  color='blue'
-                >
-                  Iran
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick(undefined, "KR", "Korea, South");
-                  }}
-                  color='blue'
-                >
-                  South Korea
-                </Button>
-                <Button
-                  basic
-                  size='mini'
-                  onClick={(e, data) => {
-                    handleBtnClick("France", "FR", "France");
-                  }}
-                  color='blue'
-                >
-                  France
-                </Button>
-              </Button.Group>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(data.children, "US", "USA");
+                }}
+                color='blue'
+              >
+                New Jersey
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(data.children, "US", "USA");
+                }}
+                color='blue'
+              >
+                New York
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(data.children, "US", "USA");
+                }}
+                color='blue'
+              >
+                California
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(data.children, "US", "USA");
+                }}
+                color='blue'
+              >
+                Washington
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(data.children, "US", "USA");
+                }}
+                color='blue'
+              >
+                Massachusetts
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(undefined, "IN", "India");
+                }}
+                color='blue'
+              >
+                India
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(undefined, "IT", "Italy");
+                }}
+                color='blue'
+              >
+                Italy
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(undefined, "IR", "Iran");
+                }}
+                color='blue'
+              >
+                Iran
+              </Button>
+              <Button
+                basic
+                size='mini'
+                onClick={(e, data) => {
+                  handleBtnClick(undefined, "KR", "Korea, South");
+                }}
+                color='blue'
+              >
+                South Korea
+              </Button>
+              <Button
+                size='mini'
+                basic
+                onClick={(e, data) => {
+                  handleBtnClick("France", "FR", "France");
+                }}
+                color='blue'
+              >
+                France
+              </Button>
               {quickLinkState && memoBarChartComp}
             </Responsive>
           </Grid.Column>

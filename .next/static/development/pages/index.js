@@ -86385,12 +86385,6 @@ var Index = function Index() {
       lineNumber: 73
     },
     __self: this
-  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"].Group, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 74
-    },
-    __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     basic: true,
     size: "mini",
@@ -86400,7 +86394,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 74
     },
     __self: this
   }, "New Jersey"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86412,7 +86406,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 84
     },
     __self: this
   }, "New York"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86424,7 +86418,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 94
     },
     __self: this
   }, "California"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86436,7 +86430,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105
+      lineNumber: 104
     },
     __self: this
   }, "Washington"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86448,7 +86442,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 114
     },
     __self: this
   }, "Massachusetts"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86460,7 +86454,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125
+      lineNumber: 124
     },
     __self: this
   }, "India"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86472,7 +86466,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 135
+      lineNumber: 134
     },
     __self: this
   }, "Italy"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86484,7 +86478,7 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 145
+      lineNumber: 144
     },
     __self: this
   }, "Iran"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -86496,22 +86490,22 @@ var Index = function Index() {
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 154
     },
     __self: this
   }, "South Korea"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    basic: true,
     size: "mini",
+    basic: true,
     onClick: function onClick(e, data) {
       handleBtnClick("France", "FR", "France");
     },
     color: "blue",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 165
+      lineNumber: 164
     },
     __self: this
-  }, "France")), quickLinkState && memoBarChartComp)))));
+  }, "France"), quickLinkState && memoBarChartComp)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);

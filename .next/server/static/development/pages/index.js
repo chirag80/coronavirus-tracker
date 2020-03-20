@@ -117,6 +117,10 @@ const BarChart = ({
   selectedState
 }) => {
   const {
+    0: loading,
+    1: setLoading
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const {
     0: locations,
     1: setLocations
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
@@ -131,8 +135,9 @@ const BarChart = ({
 
   const getData = async () => {
     let response = await fetch("https://coronavirus-tracker-api.herokuapp.com/confirmed");
-    let data = await response.json();
-    console.log("useEffect bar chart", data.locations);
+    let data = await response.json(); //console.log("useEffect bar chart", data.locations);
+
+    setLoading(false);
     setLocations(data.locations);
   };
 
@@ -142,24 +147,26 @@ const BarChart = ({
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     if (Object.keys(locations).length > 0) {
       setChartData(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_2__["getBarChartData"])(locations, selectedState));
-      setChartOptions(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_2__["getBarChartOptions"])());
+      setChartOptions(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_2__["getBarChartOptions"])(selectedState));
     }
   }, [selectedState, locations]);
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("br", {
+  if (loading) return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, " Loading Bar chart..");
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 35
     },
     __self: undefined
-  }), __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Bar"], {
+  }, __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_1__["Bar"], {
+    height: 125,
     data: chartData,
     options: chartOptinos,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 36
     },
     __self: undefined
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BarChart);
@@ -357,7 +364,7 @@ const StateStats = ({
         lineNumber: 10
       },
       __self: undefined
-    }, "Select country above to see state wise data");
+    }, "Select country in above dropdown to see state wise data");
   }
 
   const {
@@ -598,9 +605,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Chart */ "./components/Chart.js");
 /* harmony import */ var _components_StateStats__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/StateStats */ "./components/StateStats.js");
+/* harmony import */ var _components_BarChart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/BarChart */ "./components/BarChart.js");
 var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\pages\\index.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -621,11 +630,15 @@ const Index = () => {
     iso2: "",
     iso3: ""
   });
+  const {
+    0: quickLinkState,
+    1: setQuickLink
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined);
   const memoStatsComponent = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => __jsx(_components_Stats__WEBPACK_IMPORTED_MODULE_2__["default"], {
     url: url,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 17
     },
     __self: undefined
   }), [url]);
@@ -634,13 +647,12 @@ const Index = () => {
     iso2: selectedCountry.iso3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 21
     },
     __self: undefined
   }), [selectedCountry]);
 
   const onChange = (iso2, iso3) => {
-    //console.log("iso2=>", iso2, "iso3=>", iso3);
     //this is to load state dropdown for StateStats
     setSelected({
       iso2,
@@ -655,10 +667,27 @@ const Index = () => {
     }
   };
 
+  const memoBarChartComp = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => __jsx(_components_BarChart__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    selectedState: quickLinkState,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: undefined
+  }), [quickLinkState]);
+
+  const handleBtnClick = (provinceState, iso2, countryName) => {
+    setQuickLink({
+      iso2,
+      provinceState,
+      countryName
+    });
+  };
+
   return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 48
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
@@ -666,89 +695,235 @@ const Index = () => {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 49
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 50
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 51
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 52
     },
     __self: undefined
   }, __jsx(_components_Chart__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 53
     },
     __self: undefined
   })))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 57
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 58
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 59
     },
     __self: undefined
   }, __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: onChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 60
     },
     __self: undefined
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 61
     },
     __self: undefined
   }), memoStatsComponent))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 66
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 67
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 68
     },
     __self: undefined
-  }, memoStateStats)))));
+  }, memoStateStats))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
+    stretched: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: undefined
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 72
+    },
+    __self: undefined
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
+    as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: undefined
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"].Group, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: undefined
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: undefined
+  }, "New Jersey"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85
+    },
+    __self: undefined
+  }, "New York"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 95
+    },
+    __self: undefined
+  }, "California"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 105
+    },
+    __self: undefined
+  }, "Washington"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: undefined
+  }, "Massachusetts"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(undefined, "IN", "India");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 125
+    },
+    __self: undefined
+  }, "India"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(undefined, "IT", "Italy");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 135
+    },
+    __self: undefined
+  }, "Italy"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(undefined, "IR", "Iran");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 145
+    },
+    __self: undefined
+  }, "Iran"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick(undefined, "KR", "Korea, South");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 155
+    },
+    __self: undefined
+  }, "South Korea"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: (e, data) => {
+      handleBtnClick("France", "FR", "France");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 165
+    },
+    __self: undefined
+  }, "France")), quickLinkState && memoBarChartComp)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -769,10 +944,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarChartData", function() { return getBarChartData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBarChartOptions", function() { return getBarChartOptions; });
 const getBarChartData = (apiData, selectedState) => {
-  console.log("Locations in chart utils", apiData, selectedState);
-  const list = apiData.filter(x => x.country_code === selectedState.iso2);
-  const record = list.length > 1 ? list.find(x => x.province === selectedState.provinceState) : list[0];
-  console.log("record", record);
+  //console.log("Locations in chart utils", apiData, selectedState);
+  const list = apiData.filter(x => x.country_code === selectedState.iso2); //console.log("List ", list);
+  //const tmpList = list.filter(x => x.province === selectedState.provinceState);
+  //console.log("tmp List", tmpList);
+
+  const record = list.length > 1 ? list.find(x => x.province === selectedState.provinceState) : list[0]; //console.log("record", record);
+
   const sorted = Object.keys(record.history).sort((a, b) => new Date(a) - new Date(b));
   const labels = sorted.slice(-15);
   return {
@@ -780,7 +958,7 @@ const getBarChartData = (apiData, selectedState) => {
     datasets: [{
       label: "Daily cases",
       backgroundColor: "#ff8c00",
-      borderColor: "#ff8c00",
+      borderColor: "grey",
       borderWidth: 1,
       hoverBackgroundColor: "#ffa500",
       hoverBorderColor: "#ffa500",
@@ -789,7 +967,7 @@ const getBarChartData = (apiData, selectedState) => {
   };
 };
 
-const getBarChartOptions = () => {
+const getBarChartOptions = selectedState => {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -818,7 +996,7 @@ const getBarChartOptions = () => {
     title: {
       display: "Display",
       fontSize: 15,
-      text: "Daily New Cases"
+      text: selectedState.provinceState ? "Total Cases in " + selectedState.provinceState : "Total Cases in " + selectedState.countryName
     }
   };
 };
@@ -980,7 +1158,7 @@ const xAxes = [{
 const yAxes = [{
   scaleLabel: {
     display: true,
-    labelString: "Number of cases (in thousands)",
+    labelString: "Number of cases",
     fontSize: 15
   },
   ticks: {
@@ -1021,7 +1199,7 @@ const xAxesBar = [{
 const yAxesBar = [{
   scaleLabel: {
     display: true,
-    labelString: "Number of cases (in thousands)",
+    labelString: "Number of cases",
     fontSize: 15
   },
   ticks: {

@@ -7,7 +7,7 @@ import BarChart from "./BarChart";
 const StateStats = ({ iso3, iso2 }) => {
   //console.log("state stats =>", country);
   if (iso3 === "") {
-    return <h3>Select country above to see state wise data</h3>;
+    return <h3>Select country in above dropdown to see state wise data</h3>;
   }
 
   const [selectedState, setSelectedState] = useState(undefined);

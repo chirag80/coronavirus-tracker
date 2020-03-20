@@ -25,17 +25,21 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 var BarChart = function BarChart(_ref) {
   var selectedState = _ref.selectedState;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
-      locations = _useState[0],
-      setLocations = _useState[1];
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      loading = _useState[0],
+      setLoading = _useState[1];
 
   var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
-      chartData = _useState2[0],
-      setChartData = _useState2[1];
+      locations = _useState2[0],
+      setLocations = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
-      chartOptinos = _useState3[0],
-      setChartOptions = _useState3[1];
+      chartData = _useState3[0],
+      setChartData = _useState3[1];
+
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
+      chartOptinos = _useState4[0],
+      setChartOptions = _useState4[1];
 
   var getData = function getData() {
     var response, data;
@@ -53,7 +57,8 @@ var BarChart = function BarChart(_ref) {
 
           case 5:
             data = _context.sent;
-            console.log("useEffect bar chart", data.locations);
+            //console.log("useEffect bar chart", data.locations);
+            setLoading(false);
             setLocations(data.locations);
 
           case 8:
@@ -70,24 +75,26 @@ var BarChart = function BarChart(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (Object.keys(locations).length > 0) {
       setChartData(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getBarChartData"])(locations, selectedState));
-      setChartOptions(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getBarChartOptions"])());
+      setChartOptions(Object(_utils_chartUtils__WEBPACK_IMPORTED_MODULE_3__["getBarChartOptions"])(selectedState));
     }
   }, [selectedState, locations]);
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx("br", {
+  if (loading) return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, " Loading Bar chart..");
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 35
     },
     __self: this
-  }), __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__["Bar"], {
+  }, __jsx(react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__["Bar"], {
+    height: 125,
     data: chartData,
     options: chartOptinos,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 36
     },
     __self: this
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BarChart);
@@ -290,7 +297,7 @@ var StateStats = function StateStats(_ref) {
         lineNumber: 10
       },
       __self: this
-    }, "Select country above to see state wise data");
+    }, "Select country in above dropdown to see state wise data");
   }
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined),
@@ -86180,9 +86187,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 /* harmony import */ var _components_Chart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Chart */ "./components/Chart.js");
 /* harmony import */ var _components_StateStats__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/StateStats */ "./components/StateStats.js");
+/* harmony import */ var _components_BarChart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/BarChart */ "./components/BarChart.js");
 var _jsxFileName = "C:\\Learning\\coronavirus-tracker\\pages\\index.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -86203,12 +86212,16 @@ var Index = function Index() {
       selectedCountry = _useState2[0],
       setSelected = _useState2[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined),
+      quickLinkState = _useState3[0],
+      setQuickLink = _useState3[1];
+
   var memoStatsComponent = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
     return __jsx(_components_Stats__WEBPACK_IMPORTED_MODULE_2__["default"], {
       url: url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 17
       },
       __self: this
     });
@@ -86219,14 +86232,13 @@ var Index = function Index() {
       iso2: selectedCountry.iso3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 21
       },
       __self: this
     });
   }, [selectedCountry]);
 
   var onChange = function onChange(iso2, iso3) {
-    //console.log("iso2=>", iso2, "iso3=>", iso3);
     //this is to load state dropdown for StateStats
     setSelected({
       iso2: iso2,
@@ -86241,10 +86253,29 @@ var Index = function Index() {
     }
   };
 
+  var memoBarChartComp = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
+    return __jsx(_components_BarChart__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      selectedState: quickLinkState,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: this
+    });
+  }, [quickLinkState]);
+
+  var handleBtnClick = function handleBtnClick(provinceState, iso2, countryName) {
+    setQuickLink({
+      iso2: iso2,
+      provinceState: provinceState,
+      countryName: countryName
+    });
+  };
+
   return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 48
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
@@ -86252,89 +86283,235 @@ var Index = function Index() {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 49
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 50
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 51
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 52
     },
     __self: this
   }, __jsx(_components_Chart__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 53
     },
     __self: this
   })))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 57
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 58
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 59
     },
     __self: this
   }, __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: onChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 60
     },
     __self: this
   }), __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 61
     },
     __self: this
   }), memoStatsComponent))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
     stretched: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 66
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 67
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
     as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 68
     },
     __self: this
-  }, memoStateStats)))));
+  }, memoStateStats))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
+    stretched: true,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 71
+    },
+    __self: this
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 72
+    },
+    __self: this
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Responsive"], {
+    as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 73
+    },
+    __self: this
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"].Group, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 74
+    },
+    __self: this
+  }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 75
+    },
+    __self: this
+  }, "New Jersey"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85
+    },
+    __self: this
+  }, "New York"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 95
+    },
+    __self: this
+  }, "California"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 105
+    },
+    __self: this
+  }, "Washington"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(data.children, "US", "USA");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: this
+  }, "Massachusetts"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(undefined, "IN", "India");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 125
+    },
+    __self: this
+  }, "India"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(undefined, "IT", "Italy");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 135
+    },
+    __self: this
+  }, "Italy"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(undefined, "IR", "Iran");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 145
+    },
+    __self: this
+  }, "Iran"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick(undefined, "KR", "Korea, South");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 155
+    },
+    __self: this
+  }, "South Korea"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    basic: true,
+    size: "mini",
+    onClick: function onClick(e, data) {
+      handleBtnClick("France", "FR", "France");
+    },
+    color: "blue",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 165
+    },
+    __self: this
+  }, "France")), quickLinkState && memoBarChartComp)))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -86358,14 +86535,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var getBarChartData = function getBarChartData(apiData, selectedState) {
-  console.log("Locations in chart utils", apiData, selectedState);
+  //console.log("Locations in chart utils", apiData, selectedState);
   var list = apiData.filter(function (x) {
     return x.country_code === selectedState.iso2;
-  });
+  }); //console.log("List ", list);
+  //const tmpList = list.filter(x => x.province === selectedState.provinceState);
+  //console.log("tmp List", tmpList);
+
   var record = list.length > 1 ? list.find(function (x) {
     return x.province === selectedState.provinceState;
-  }) : list[0];
-  console.log("record", record);
+  }) : list[0]; //console.log("record", record);
+
   var sorted = Object.keys(record.history).sort(function (a, b) {
     return new Date(a) - new Date(b);
   });
@@ -86375,7 +86555,7 @@ var getBarChartData = function getBarChartData(apiData, selectedState) {
     datasets: [{
       label: "Daily cases",
       backgroundColor: "#ff8c00",
-      borderColor: "#ff8c00",
+      borderColor: "grey",
       borderWidth: 1,
       hoverBackgroundColor: "#ffa500",
       hoverBorderColor: "#ffa500",
@@ -86386,7 +86566,7 @@ var getBarChartData = function getBarChartData(apiData, selectedState) {
   };
 };
 
-var getBarChartOptions = function getBarChartOptions() {
+var getBarChartOptions = function getBarChartOptions(selectedState) {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -86415,7 +86595,7 @@ var getBarChartOptions = function getBarChartOptions() {
     title: {
       display: "Display",
       fontSize: 15,
-      text: "Daily New Cases"
+      text: selectedState.provinceState ? "Total Cases in " + selectedState.provinceState : "Total Cases in " + selectedState.countryName
     }
   };
 };
@@ -86586,7 +86766,7 @@ var xAxes = [{
 var yAxes = [{
   scaleLabel: {
     display: true,
-    labelString: "Number of cases (in thousands)",
+    labelString: "Number of cases",
     fontSize: 15
   },
   ticks: {
@@ -86627,7 +86807,7 @@ var xAxesBar = [{
 var yAxesBar = [{
   scaleLabel: {
     display: true,
-    labelString: "Number of cases (in thousands)",
+    labelString: "Number of cases",
     fontSize: 15
   },
   ticks: {

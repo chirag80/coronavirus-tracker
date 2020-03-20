@@ -1,12 +1,15 @@
 const getBarChartData = (apiData, selectedState) => {
-  console.log("Locations in chart utils", apiData, selectedState);
+  //console.log("Locations in chart utils", apiData, selectedState);
   const list = apiData.filter(x => x.country_code === selectedState.iso2);
+  //console.log("List ", list);
+  //const tmpList = list.filter(x => x.province === selectedState.provinceState);
+  //console.log("tmp List", tmpList);
   const record =
     list.length > 1
       ? list.find(x => x.province === selectedState.provinceState)
       : list[0];
 
-  console.log("record", record);
+  //console.log("record", record);
 
   const sorted = Object.keys(record.history).sort(
     (a, b) => new Date(a) - new Date(b)
@@ -20,7 +23,7 @@ const getBarChartData = (apiData, selectedState) => {
       {
         label: "Daily cases",
         backgroundColor: "#ff8c00",
-        borderColor: "#ff8c00",
+        borderColor: "grey",
         borderWidth: 1,
         hoverBackgroundColor: "#ffa500",
         hoverBorderColor: "#ffa500",
@@ -30,7 +33,7 @@ const getBarChartData = (apiData, selectedState) => {
   };
 };
 
-const getBarChartOptions = () => {
+const getBarChartOptions = selectedState => {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -57,7 +60,9 @@ const getBarChartOptions = () => {
     title: {
       display: "Display",
       fontSize: 15,
-      text: "Daily New Cases"
+      text: selectedState.provinceState
+        ? "Total Cases in " + selectedState.provinceState
+        : "Total Cases in " + selectedState.countryName
     }
   };
 };
@@ -227,7 +232,7 @@ const yAxes = [
   {
     scaleLabel: {
       display: true,
-      labelString: "Number of cases (in thousands)",
+      labelString: "Number of cases",
       fontSize: 15
     },
     ticks: {
@@ -274,7 +279,7 @@ const yAxesBar = [
   {
     scaleLabel: {
       display: true,
-      labelString: "Number of cases (in thousands)",
+      labelString: "Number of cases",
       fontSize: 15
     },
     ticks: {

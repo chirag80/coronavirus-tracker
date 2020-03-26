@@ -24,6 +24,7 @@ const Index = () => {
   );
 
   const onChange = (iso2, iso3) => {
+    console.log("index js onchange", iso2, iso3);
     //this is to load state dropdown for StateStats
     setSelected({ iso2, iso3 });
 

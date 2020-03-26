@@ -68,11 +68,10 @@ const getBarChartOptions = selectedState => {
 };
 
 const getChartData = (chartType, apiData) => {
-  //console.log("Api data", apiData.slice(-10));
   let sliced = apiData.slice(-40);
-
+  //console.log("Api data", sliced);
   return {
-    labels: sliced.map(it => it.reportDateString),
+    labels: sliced.map(it => it.reportDate),
     datasets: [
       {
         label: "Total",
@@ -156,6 +155,23 @@ const getChartData = (chartType, apiData) => {
         pointRadius: 2,
         pointHitRadius: 10,
         data: sliced.map(it => it.totalRecovered)
+      },
+      {
+        label: "Delta Confirmed",
+        fill: false,
+        lineTension: 0,
+        borderWidth: 2,
+        pointBackgroundColor: "lime",
+        pointBorderColor: "lime",
+        pointHoverRadius: 5,
+        pointRadius: 2,
+        backgroundColor: "lime",
+        pointHoverBackgroundColor: "lime",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        borderColor: "lime",
+        data: sliced.map(it => it.deltaConfirmed)
       }
     ]
   };

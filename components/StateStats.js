@@ -21,7 +21,7 @@ const StateStats = ({ iso3, iso2 }) => {
     setSelectedState(undefined);
   }, [iso3]);
 
-  const { stats: states, loading, error } = useFetch(
+  let { stats: states, loading, error } = useFetch(
     `https://covid19.mathdro.id/api/countries/${iso3}/confirmed`
   );
 
@@ -37,15 +37,18 @@ const StateStats = ({ iso3, iso2 }) => {
     );
 
   //console.log("State wise info", states);
-
-  let stateOptions = states.map(({ provinceState, countryRegion }, index) => ({
-    key: provinceState || countryRegion,
-    value: provinceState || countryRegion,
-    text: provinceState || countryRegion
-  }));
+  states = states.filter(x => x.lastUpdate === states[0].lastUpdate);
+  //console.log("State wise info 2", states);
+  let stateOptions = states.map(
+    ({ provinceState, countryRegion, combinedKey }, index) => ({
+      key: combinedKey,
+      value: combinedKey,
+      text: combinedKey
+    })
+  );
 
   const onChange = selectedValue => {
-    let selected = states.find(state => state.provinceState === selectedValue);
+    let selected = states.find(state => state.combinedKey === selectedValue);
     // console.log("Selected state info", selected);
     if (!selected) {
       selected = states[0];

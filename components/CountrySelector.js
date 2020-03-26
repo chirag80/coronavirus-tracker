@@ -11,11 +11,14 @@ const CountrySelector = ({ onChange }) => {
   if (error) return <p>Error loading countries..</p>;
 
   // change value with countries.iso3[code] if iso3 code required to be passed to API
-  let countryOptions = Object.entries(countries.countries).map(
-    ([name, code]) => {
-      return { key: name, value: code, text: name };
-    }
-  );
+  //console.log("country selector", countries);
+  let countryOptions = countries.countries.map(country => {
+    return {
+      key: country.name,
+      value: country.iso2,
+      text: country.name
+    };
+  });
 
   countryOptions = [
     { key: "world", value: "world", text: "World" },
@@ -40,7 +43,10 @@ const CountrySelector = ({ onChange }) => {
         defaultValue='world'
         onChange={(e, data) => {
           // console.log("countries=>", data.value, countries.iso3[data.value]);
-          onChange(data.value, countries.iso3[data.value]);
+          onChange(
+            data.value,
+            countries.countries.find(x => x.iso2 === data.value).iso3
+          );
         }}
       />
       {/* </Grid.Column>
